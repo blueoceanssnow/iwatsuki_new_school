@@ -1,65 +1,64 @@
-/* ===== 岩槻新校 パステル・UI整形（このページ限定：<link>を入れたページのみ読まれます） ===== */
+/* ===== Minimal Clean Theme for NetCommons (page-scoped via <link>) ===== */
 :root{
-  --bg:#f6faff;          /* ほのかな青みの白 */
-  --ink:#23314a;         /* 優しい紺（本文/見出し） */
-  --gold:#ffe38f;        /* 柔らかいゴールド（ボタン/アクセント） */
-  --gold-deep:#ffd55a;   /* ホバー時の濃いめ */
-  --card:#ffffff;        /* カード背景 */
-  --ring:rgba(35,49,74,.08); /* うっすら境界線 */
+  --bg:#f7f7f5;        /* 温度のない薄い生成り */
+  --ink:#1f2a37;       /* 落ち着いた濃紺グレー */
+  --sub:#475569;       /* サブテキスト */
+  --line:rgba(15,23,42,.08);
+  --accent:#3b82f6;    /* リンク/小アクセント（控えめ） */
+  --btn:#111827;       /* ボタンの黒 */
+  --btn-ink:#fff;
+  --radius:14px;
+  --shadow:0 8px 28px rgba(2,6,23,.06);
+  --w:1100px;          /* レイアウト幅 */
 }
 
-/* 全体の余白・文字 */
-body{background:var(--bg); color:var(--ink);}
-h1,h2,h3,h4{color:var(--ink); font-weight:800; letter-spacing:.01em}
+/* Base */
+html,body{background:var(--bg); color:var(--ink); font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; }
+img{max-width:100%; height:auto; display:block}
+a{color:var(--accent); text-decoration:none}
+a:hover{text-decoration:underline}
 
-/* NetCommons3は Bootstrap系の .panel / .list-group が多い前提でカード化 */
+/* レイアウトの締まり */
+.container, .nc-content, .blog-index, .article-list, .panel-body{ max-width:var(--w); margin:0 auto; }
+
+/* タイポ（大きすぎず、余白広め） */
+h1,h2,h3{font-weight:800; letter-spacing:.01em; color:var(--ink)}
+h1{font-size:clamp(28px,3.2vw,40px); margin:28px 0 10px}
+h2{font-size:clamp(22px,2.4vw,28px); margin:24px 0 8px}
+p,li{line-height:1.8; color:var(--sub)}
+
+/* ブロック＝“紙” っぽいカードに */
 .panel, .nc-block, .blog-entry, .whatsnew-list, .list-group, .article-list, .nc-content-list{
-  background:var(--card);
-  border:1px solid var(--ring);
-  border-radius:16px!important;
-  box-shadow:0 6px 24px rgba(31,41,55,.06);
+  background:#fff; border:1px solid var(--line); border-radius:var(--radius)!important; box-shadow:var(--shadow);
 }
-
-/* パネル見出しをすっきり */
 .panel-heading{
-  background:transparent!important;
-  border-bottom:1px solid var(--ring)!important;
-  font-weight:800; color:var(--ink);
+  background:transparent!important; border-bottom:1px solid var(--line)!important;
+  padding:14px 18px!important; font-weight:800; color:var(--ink)
+}
+.panel-body{padding:18px!important}
+
+/* リスト行間/区切り */
+.list-group-item, .whatsnew-list li, .article-list li{
+  border-color:var(--line)!important; padding:12px 16px!important
 }
 
-/* リストの行間とタップしやすさ */
-.list-group-item, .article-list li, .whatsnew-list li{
-  border-color:var(--ring)!important;
-  padding:12px 16px!important;
+/* 日付やカテゴリは薄め */
+.nc-date,.date,.label,.badge,.category,.posted{opacity:.7}
+
+/* CTA（必要な時だけ）：地の色は黒、ホバーはわずかに明るく。 */
+.btn, a.btn, .btn-default, .btn-primary{
+  background:var(--btn)!important; color:var(--btn-ink)!important; border:0!important;
+  border-radius:999px!important; padding:10px 18px!important; font-weight:700!important;
+  box-shadow:0 10px 24px rgba(0,0,0,.10)!important;
+}
+.btn:hover, a.btn:hover{ filter:brightness(1.06) }
+
+/* 余白の呼吸 */
+.nc-content, .blog-index, .article-list{ padding:20px!important; }
+
+/* モバイル：角丸/余白を少し軽く */
+@media (max-width:900px){
+  .panel,.nc-block{border-radius:12px!important}
+  .panel-body{padding:16px!important}
 }
 
-/* 日付やカテゴリの弱色 */
-.nc-date, .date, .label, .badge, .category, .posted{
-  opacity:.75; font-weight:600;
-}
-
-/* CTAボタン（リンクリストや本文内a.btnに適用） */
-a.btn, .btn-primary, .btn-default, .btn-info{
-  background:var(--gold)!important; color:#1b2740!important; border:0!important;
-  border-radius:999px!important; font-weight:800!important;
-  padding:10px 18px!important; box-shadow:0 8px 20px rgba(0,0,0,.10)!important;
-}
-a.btn:hover, .btn-primary:hover, .btn-default:hover, .btn-info:hover{
-  background:var(--gold-deep)!important; color:#1b2740!important;
-}
-
-/* “リンクリスト”をボタン群っぽく */
-.link-list a, .nc-links a{
-  display:inline-block; margin:6px 8px 0 0;
-}
-
-/* 余白の基準を少しだけゆったり */
-.nc-content, .panel-body, .blog-index, .article-list{
-  padding:18px!important;
-}
-
-/* モバイル最適化（1カラム感を強め、タップしやすく） */
-@media (max-width: 900px){
-  .panel, .nc-block{border-radius:14px!important;}
-  .panel-body{padding:16px!important;}
-}
