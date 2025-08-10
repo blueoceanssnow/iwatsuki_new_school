@@ -1,0 +1,4 @@
+git add index.html
+git commit -m "LP: ヒーロー・CTA・特徴3つを追加（岩高カラー）"
+git push
+
