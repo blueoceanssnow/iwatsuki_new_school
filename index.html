@@ -7,59 +7,63 @@
   <link rel="preload" href="hero.jpg" as="image">
   <style>
     :root{
-      --iwk-navy:#0b1b3a;   /* 岩高ネイビー */
-      --iwk-gold:#ffe04d;   /* アクセントの黄 */
-      --iwk-text:#ffffff;
+      /* Pastel Branding（女子が多い前提：やわらか×上品） */
+      --bg:#f6faff;          /* ほのかな青みの白 */
+      --ink:#23314a;         /* やさしい紺（本文・見出し） */
+      --gold:#ffe38f;        /* 柔らかいゴールド（アクセント） */
+      --gold-deep:#ffd55a;   /* ホバー時の濃いめ */
+      --card:#ffffff;        /* カード背景 */
     }
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--iwk-navy);color:var(--iwk-text)}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--ink)}
 
-    /* ===== Hero（背景写真＋薄い暗幕で文字を読みやすく） ===== */
+    /* ===== Hero：明るめ写真＋白ベールで可読性UP ===== */
     .iwk-hero{
-      position:relative;
-      padding:88px 16px;
-      min-height:clamp(360px,58vh,560px);
-      overflow:clip;
+      position:relative; padding:88px 16px; min-height:clamp(360px,58vh,560px); overflow:clip;
     }
     .iwk-hero::before{
-      content:"";
-      position:absolute; inset:0;
+      content:""; position:absolute; inset:0;
       background:url("hero.jpg") center/cover no-repeat;
-      /* 被写体がやや左寄り→40%に寄せて見切れ防止 */
-      background-position:40% center;
-      filter:grayscale(.05) contrast(1.05) brightness(.9);
+      background-position:40% center; /* 被写体が左寄り → 40%に寄せる */
+      filter:contrast(1.03) saturate(1.05) brightness(1.06);
       transform:scale(1.03);
     }
     .iwk-hero::after{
       content:""; position:absolute; inset:0;
-      background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.45));
+      /* 明るく優しい雰囲気に。濃いときは .42→.30 に下げる／さらに明るくは .52 へ */
+      background:linear-gradient(180deg, rgba(255,255,255,.46), rgba(255,255,255,.46));
     }
-    .iwk-hero__inner{position:relative; z-index:1; max-width:1100px; margin:0 auto; text-align:center;}
-    .iwk-eyebrow{letter-spacing:.12em; font-weight:800; opacity:.92; margin:0 0 10px;}
-    .iwk-title{font-size:clamp(32px,4.6vw,56px); line-height:1.15; margin:.2em 0 .35em; font-weight:900;}
-    .iwk-lead{font-size:clamp(15px,2.2vw,19px); opacity:.96; margin:0 auto 24px; max-width:780px;}
+    .iwk-hero__inner{position:relative; z-index:1; max-width:1100px; margin:0 auto; text-align:center}
+    .iwk-eyebrow{letter-spacing:.12em; font-weight:800; opacity:.85; margin:0 0 10px}
+    .iwk-title{font-size:clamp(32px,4.6vw,56px); line-height:1.15; margin:.2em 0 .35em; font-weight:900}
+    .iwk-lead{font-size:clamp(15px,2.2vw,19px); opacity:.95; margin:0 auto 24px; max-width:780px}
 
-    /* ===== CTAボタン ===== */
-    .iwk-cta{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:16px;}
+    /* ===== CTAボタン：やわらか＋メリハリ ===== */
+    .iwk-cta{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:16px}
     .iwk-btn{
       display:inline-block; padding:13px 22px; border-radius:999px; font-weight:800; text-decoration:none;
-      background:var(--iwk-gold); color:var(--iwk-navy);
-      box-shadow:0 8px 20px rgba(0,0,0,.18);
-      transform:translateY(0); transition:transform .12s ease, box-shadow .12s ease, filter .12s ease;
+      background:var(--gold); color:#1b2740;
+      box-shadow:0 8px 20px rgba(0,0,0,.10);
+      transform:translateY(0);
+      transition:transform .12s ease, box-shadow .12s ease, background .12s ease, filter .12s ease;
     }
-    .iwk-btn:hover{transform:translateY(-1px); box-shadow:0 12px 26px rgba(0,0,0,.22); filter:brightness(1.02);}
-    .iwk-btn--outline{background:transparent; border:2px solid var(--iwk-gold); color:var(--iwk-gold);}
-    .iwk-btn--ghost{background:rgba(255,255,255,.12); color:#fff; border:1px solid rgba(255,255,255,.28);}
+    .iwk-btn:hover{transform:translateY(-1px); box-shadow:0 12px 26px rgba(0,0,0,.14); background:var(--gold-deep)}
+    .iwk-btn--outline{background:transparent; border:2px solid var(--gold); color:#1b2740}
+    .iwk-btn--ghost{background:rgba(255,255,255,.55); color:#1b2740; border:1px solid rgba(27,39,64,.12)}
 
-    /* ===== 特徴カード ===== */
+    /* ===== Features：読みやすいカード ===== */
     .container{max-width:1100px;margin:0 auto;padding:0 16px}
-    .iwk-features{max-width:1100px;margin:32px auto 0;padding:0 16px;display:grid;gap:18px;grid-template-columns:repeat(3,1fr);}
-    .iwk-feature{background:#fff;color:var(--iwk-navy);border-radius:16px;padding:20px;box-shadow:0 6px 24px rgba(0,0,0,.08);}
-    .iwk-feature h3{margin:.2em 0 .35em;font-size:19px;font-weight:800;letter-spacing:.01em;}
-    .iwk-feature p{margin:0;font-size:15px;line-height:1.7;opacity:.95;}
+    .iwk-features{max-width:1100px;margin:32px auto 0;padding:0 16px;display:grid;gap:18px;grid-template-columns:repeat(3,1fr)}
+    .iwk-feature{
+      background:var(--card); color:var(--ink); border-radius:16px; padding:20px;
+      box-shadow:0 6px 24px rgba(31,41,55,.06); border:1px solid rgba(31,41,55,.06);
+    }
+    .iwk-feature h3{margin:.2em 0 .35em;font-size:19px;font-weight:800;letter-spacing:.01em}
+    .iwk-feature p{margin:0;font-size:15px;line-height:1.7;opacity:.95}
 
     @media (max-width:900px){
-      .iwk-features{grid-template-columns:1fr;}
-      .iwk-hero{padding:72px 16px;}
+      .iwk-features{grid-template-columns:1fr}
+      .iwk-hero{padding:72px 16px}
     }
   </style>
 </head>
@@ -77,52 +81,10 @@
     </div>
   </header>
 
-  <main class="container" role="main">
-    <section class="iwk-features" aria-label="岩槻新校の特徴">
-      <article class="iwk-feature"><h3>探究 × 地域連携</h3><p>地域と学ぶ実践型の学び。外部連携で“使える力”を伸ばす。</p></article>
-      <article class="iwk-feature"><h3>少人数 × 手厚い支援</h3><p>面談・補講・個別サポートで、挑戦の背中を押す。</p></article>
-      <article class="iwk-feature"><h3>情報発信を強化</h3><p>写真・記事・動画で学校の“今”tyle>
-  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:#0b1b3a;color:#fff}
-  .iwk-hero{padding:64px 16px}
-  .iwk-hero__inner{max-width:1100px;margin:0 auto;text-align:center}
-  .iwk-eyebrow{letter-spacing:.08em;font-weight:700;opacity:.9;margin:0 0 8px}
-  .iwk-title{font-size:clamp(28px,4vw,48px);line-height:1.2;margin:.2em 0 .3em;font-weight:800}
-  .iwk-lead{font-size:clamp(14px,2.2vw,18px);opacity:.95;margin:0 auto 20px;max-width:800px}
-  .iwk-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:12px}
-  .iwk-btn{display:inline-block;padding:12px 20px;border-radius:999px;font-weight:700;text-decoration:none;background:#ffe04d;color:#0b1b3a}
-  .iwk-btn:hover{filter:brightness(1.03)}
-  .iwk-btn--outline{background:transparent;border:2px solid #ffe04d;color:#ffe04d}
-  .iwk-btn--ghost{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25)}
-  @media (prefers-color-scheme: light){body{background:#0e2a5a}}
-  .iwk-features{max-width:1100px;margin:28px auto 0;padding:0 16px;display:grid;gap:16px;grid-template-columns:repeat(3,1fr)}
-  .iwk-feature{background:#fff;color:#0b1b3a;border-radius:14px;padding:18px;box-shadow:0 6px 20px rgba(0,0,0,.06)}
-  .iwk-feature h3{margin:.2em 0 .3em;font-size:18px}
-  .iwk-feature p{margin:0;font-size:14px;opacity:.9}
-  @media (max-width:840px){.iwk-features{grid-template-columns:1fr}}
-  .container{max-width:1100px;margin:0 auto;padding:0 16px}
-</style>
-<body>
-  <div class="iwk-hero">
-    <div class="iwk-hero__inner">
-      <p class="iwk-eyebrow">受検生の方へ</p>
-      <h1 class="iwk-title">岩槻新校<br>はじまる。</h1>
-      <p class="iwk-lead">説明会・学校案内・メッセージなど、最新情報をまとめました。</p>
-      <div class="iwk-cta">
-        <a class="iwk-btn" href="https://iwatsuki-h.spec.ed.jp/XXX/entry_info" target="_top">説明会・入試情報</a>
-        <a class="iwk-btn iwk-btn--outline" href="https://iwatsuki-h.spec.ed.jp/XXX/pamphlet" target="_top">学校案内</a>
-        <a class="iwk-btn iwk-btn--ghost" href="https://iwatsuki-h.spec.ed.jp/XXX/message" target="_top">校長メッセージ</a>
-      </div>
-    </div>
-  </div>
+  <mai
 
-  <div class="iwk-features container">
-    <div class="iwk-feature"><h3>探究 × 地域連携</h3><p>地域と学ぶ実践型の学び。外部連携で“使える力”を伸ばす。</p></div>
-    <div class="iwk-feature"><h3>少人数 × 手厚い支援</h3><p>面談・補講・個別サポートで、挑戦の背中を押す。</p></div>
-    <div class="iwk-feature"><h3>情報発信を強化</h3><p>写真・記事・動画で学校の“今”をタイムリーに発信。</p></div>
-  </div>
-</body>
-</html>
-
+cd ~/Desktop/iwatsuki_new_school
+cat > index.html <<'EOF'
 <!doctype html>
 <html lang="ja">
 <head>
@@ -132,59 +94,63 @@
   <link rel="preload" href="hero.jpg" as="image">
   <style>
     :root{
-      --iwk-navy:#0b1b3a;   /* 岩高ネイビー */
-      --iwk-gold:#ffe04d;   /* アクセントの黄 */
-      --iwk-text:#ffffff;
+      /* Pastel Branding（女子が多い前提：やわらか×上品） */
+      --bg:#f6faff;          /* ほのかな青みの白 */
+      --ink:#23314a;         /* やさしい紺（本文・見出し） */
+      --gold:#ffe38f;        /* 柔らかいゴールド（アクセント） */
+      --gold-deep:#ffd55a;   /* ホバー時の濃いめ */
+      --card:#ffffff;        /* カード背景 */
     }
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--iwk-navy);color:var(--iwk-text)}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--ink)}
 
-    /* ===== Hero（背景写真＋薄い暗幕で文字を読みやすく） ===== */
+    /* ===== Hero：明るめ写真＋白ベールで可読性UP ===== */
     .iwk-hero{
-      position:relative;
-      padding:88px 16px;
-      min-height:clamp(360px,58vh,560px);
-      overflow:clip;
+      position:relative; padding:88px 16px; min-height:clamp(360px,58vh,560px); overflow:clip;
     }
     .iwk-hero::before{
-      content:"";
-      position:absolute; inset:0;
+      content:""; position:absolute; inset:0;
       background:url("hero.jpg") center/cover no-repeat;
-      /* 被写体がやや左寄り→40%に寄せて見切れ防止 */
-      background-position:40% center;
-      filter:grayscale(.05) contrast(1.05) brightness(.9);
+      background-position:40% center; /* 被写体が左寄り → 40%に寄せる */
+      filter:contrast(1.03) saturate(1.05) brightness(1.06);
       transform:scale(1.03);
     }
     .iwk-hero::after{
       content:""; position:absolute; inset:0;
-      background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.45));
+      /* 明るく優しい雰囲気に。濃いときは .42→.30 に下げる／さらに明るくは .52 へ */
+      background:linear-gradient(180deg, rgba(255,255,255,.46), rgba(255,255,255,.46));
     }
-    .iwk-hero__inner{position:relative; z-index:1; max-width:1100px; margin:0 auto; text-align:center;}
-    .iwk-eyebrow{letter-spacing:.12em; font-weight:800; opacity:.92; margin:0 0 10px;}
-    .iwk-title{font-size:clamp(32px,4.6vw,56px); line-height:1.15; margin:.2em 0 .35em; font-weight:900;}
-    .iwk-lead{font-size:clamp(15px,2.2vw,19px); opacity:.96; margin:0 auto 24px; max-width:780px;}
+    .iwk-hero__inner{position:relative; z-index:1; max-width:1100px; margin:0 auto; text-align:center}
+    .iwk-eyebrow{letter-spacing:.12em; font-weight:800; opacity:.85; margin:0 0 10px}
+    .iwk-title{font-size:clamp(32px,4.6vw,56px); line-height:1.15; margin:.2em 0 .35em; font-weight:900}
+    .iwk-lead{font-size:clamp(15px,2.2vw,19px); opacity:.95; margin:0 auto 24px; max-width:780px}
 
-    /* ===== CTAボタン ===== */
-    .iwk-cta{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:16px;}
+    /* ===== CTAボタン：やわらか＋メリハリ ===== */
+    .iwk-cta{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:16px}
     .iwk-btn{
       display:inline-block; padding:13px 22px; border-radius:999px; font-weight:800; text-decoration:none;
-      background:var(--iwk-gold); color:var(--iwk-navy);
-      box-shadow:0 8px 20px rgba(0,0,0,.18);
-      transform:translateY(0); transition:transform .12s ease, box-shadow .12s ease, filter .12s ease;
+      background:var(--gold); color:#1b2740;
+      box-shadow:0 8px 20px rgba(0,0,0,.10);
+      transform:translateY(0);
+      transition:transform .12s ease, box-shadow .12s ease, background .12s ease, filter .12s ease;
     }
-    .iwk-btn:hover{transform:translateY(-1px); box-shadow:0 12px 26px rgba(0,0,0,.22); filter:brightness(1.02);}
-    .iwk-btn--outline{background:transparent; border:2px solid var(--iwk-gold); color:var(--iwk-gold);}
-    .iwk-btn--ghost{background:rgba(255,255,255,.12); color:#fff; border:1px solid rgba(255,255,255,.28);}
+    .iwk-btn:hover{transform:translateY(-1px); box-shadow:0 12px 26px rgba(0,0,0,.14); background:var(--gold-deep)}
+    .iwk-btn--outline{background:transparent; border:2px solid var(--gold); color:#1b2740}
+    .iwk-btn--ghost{background:rgba(255,255,255,.55); color:#1b2740; border:1px solid rgba(27,39,64,.12)}
 
-    /* ===== 特徴カード ===== */
+    /* ===== Features：読みやすいカード ===== */
     .container{max-width:1100px;margin:0 auto;padding:0 16px}
-    .iwk-features{max-width:1100px;margin:32px auto 0;padding:0 16px;display:grid;gap:18px;grid-template-columns:repeat(3,1fr);}
-    .iwk-feature{background:#fff;color:var(--iwk-navy);border-radius:16px;padding:20px;box-shadow:0 6px 24px rgba(0,0,0,.08);}
-    .iwk-feature h3{margin:.2em 0 .35em;font-size:19px;font-weight:800;letter-spacing:.01em;}
-    .iwk-feature p{margin:0;font-size:15px;line-height:1.7;opacity:.95;}
+    .iwk-features{max-width:1100px;margin:32px auto 0;padding:0 16px;display:grid;gap:18px;grid-template-columns:repeat(3,1fr)}
+    .iwk-feature{
+      background:var(--card); color:var(--ink); border-radius:16px; padding:20px;
+      box-shadow:0 6px 24px rgba(31,41,55,.06); border:1px solid rgba(31,41,55,.06);
+    }
+    .iwk-feature h3{margin:.2em 0 .35em;font-size:19px;font-weight:800;letter-spacing:.01em}
+    .iwk-feature p{margin:0;font-size:15px;line-height:1.7;opacity:.95}
 
     @media (max-width:900px){
-      .iwk-features{grid-template-columns:1fr;}
-      .iwk-hero{padding:72px 16px;}
+      .iwk-features{grid-template-columns:1fr}
+      .iwk-hero{padding:72px 16px}
     }
   </style>
 </head>
@@ -211,4 +177,3 @@
   </main>
 </body>
 </html>
-
