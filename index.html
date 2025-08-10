@@ -1,9 +1,87 @@
 <!doctype html>
 <html lang="ja">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>岩槻新校 ランディング</title>
-<style>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>岩槻新校 ランディング</title>
+  <link rel="preload" href="hero.jpg" as="image">
+  <style>
+    :root{
+      --iwk-navy:#0b1b3a;   /* 岩高ネイビー */
+      --iwk-gold:#ffe04d;   /* アクセントの黄 */
+      --iwk-text:#ffffff;
+    }
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--iwk-navy);color:var(--iwk-text)}
+
+    /* ===== Hero（背景写真＋薄い暗幕で文字を読みやすく） ===== */
+    .iwk-hero{
+      position:relative;
+      padding:88px 16px;
+      min-height:clamp(360px,58vh,560px);
+      overflow:clip;
+    }
+    .iwk-hero::before{
+      content:"";
+      position:absolute; inset:0;
+      background:url("hero.jpg") center/cover no-repeat;
+      /* 被写体がやや左寄り→40%に寄せて見切れ防止 */
+      background-position:40% center;
+      filter:grayscale(.05) contrast(1.05) brightness(.9);
+      transform:scale(1.03);
+    }
+    .iwk-hero::after{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.45));
+    }
+    .iwk-hero__inner{position:relative; z-index:1; max-width:1100px; margin:0 auto; text-align:center;}
+    .iwk-eyebrow{letter-spacing:.12em; font-weight:800; opacity:.92; margin:0 0 10px;}
+    .iwk-title{font-size:clamp(32px,4.6vw,56px); line-height:1.15; margin:.2em 0 .35em; font-weight:900;}
+    .iwk-lead{font-size:clamp(15px,2.2vw,19px); opacity:.96; margin:0 auto 24px; max-width:780px;}
+
+    /* ===== CTAボタン ===== */
+    .iwk-cta{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:16px;}
+    .iwk-btn{
+      display:inline-block; padding:13px 22px; border-radius:999px; font-weight:800; text-decoration:none;
+      background:var(--iwk-gold); color:var(--iwk-navy);
+      box-shadow:0 8px 20px rgba(0,0,0,.18);
+      transform:translateY(0); transition:transform .12s ease, box-shadow .12s ease, filter .12s ease;
+    }
+    .iwk-btn:hover{transform:translateY(-1px); box-shadow:0 12px 26px rgba(0,0,0,.22); filter:brightness(1.02);}
+    .iwk-btn--outline{background:transparent; border:2px solid var(--iwk-gold); color:var(--iwk-gold);}
+    .iwk-btn--ghost{background:rgba(255,255,255,.12); color:#fff; border:1px solid rgba(255,255,255,.28);}
+
+    /* ===== 特徴カード ===== */
+    .container{max-width:1100px;margin:0 auto;padding:0 16px}
+    .iwk-features{max-width:1100px;margin:32px auto 0;padding:0 16px;display:grid;gap:18px;grid-template-columns:repeat(3,1fr);}
+    .iwk-feature{background:#fff;color:var(--iwk-navy);border-radius:16px;padding:20px;box-shadow:0 6px 24px rgba(0,0,0,.08);}
+    .iwk-feature h3{margin:.2em 0 .35em;font-size:19px;font-weight:800;letter-spacing:.01em;}
+    .iwk-feature p{margin:0;font-size:15px;line-height:1.7;opacity:.95;}
+
+    @media (max-width:900px){
+      .iwk-features{grid-template-columns:1fr;}
+      .iwk-hero{padding:72px 16px;}
+    }
+  </style>
+</head>
+<body>
+  <header class="iwk-hero" role="banner" aria-label="岩槻新校ヒーローセクション">
+    <div class="iwk-hero__inner">
+      <p class="iwk-eyebrow">受検生の方へ</p>
+      <h1 class="iwk-title">岩槻新校<br>はじまる。</h1>
+      <p class="iwk-lead">説明会・学校案内・メッセージなど、最新情報をまとめました。</p>
+      <nav class="iwk-cta" aria-label="主要導線">
+        <a class="iwk-btn" href="https://iwatsuki-h.spec.ed.jp/XXX/entry_info" target="_top">説明会・入試情報</a>
+        <a class="iwk-btn iwk-btn--outline" href="https://iwatsuki-h.spec.ed.jp/XXX/pamphlet" target="_top">学校案内</a>
+        <a class="iwk-btn iwk-btn--ghost" href="https://iwatsuki-h.spec.ed.jp/XXX/message" target="_top">校長メッセージ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+    <section class="iwk-features" aria-label="岩槻新校の特徴">
+      <article class="iwk-feature"><h3>探究 × 地域連携</h3><p>地域と学ぶ実践型の学び。外部連携で“使える力”を伸ばす。</p></article>
+      <article class="iwk-feature"><h3>少人数 × 手厚い支援</h3><p>面談・補講・個別サポートで、挑戦の背中を押す。</p></article>
+      <article class="iwk-feature"><h3>情報発信を強化</h3><p>写真・記事・動画で学校の“今”tyle>
   body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:#0b1b3a;color:#fff}
   .iwk-hero{padding:64px 16px}
   .iwk-hero__inner{max-width:1100px;margin:0 auto;text-align:center}
@@ -42,6 +120,95 @@
     <div class="iwk-feature"><h3>少人数 × 手厚い支援</h3><p>面談・補講・個別サポートで、挑戦の背中を押す。</p></div>
     <div class="iwk-feature"><h3>情報発信を強化</h3><p>写真・記事・動画で学校の“今”をタイムリーに発信。</p></div>
   </div>
+</body>
+</html>
+
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>岩槻新校 ランディング</title>
+  <link rel="preload" href="hero.jpg" as="image">
+  <style>
+    :root{
+      --iwk-navy:#0b1b3a;   /* 岩高ネイビー */
+      --iwk-gold:#ffe04d;   /* アクセントの黄 */
+      --iwk-text:#ffffff;
+    }
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--iwk-navy);color:var(--iwk-text)}
+
+    /* ===== Hero（背景写真＋薄い暗幕で文字を読みやすく） ===== */
+    .iwk-hero{
+      position:relative;
+      padding:88px 16px;
+      min-height:clamp(360px,58vh,560px);
+      overflow:clip;
+    }
+    .iwk-hero::before{
+      content:"";
+      position:absolute; inset:0;
+      background:url("hero.jpg") center/cover no-repeat;
+      /* 被写体がやや左寄り→40%に寄せて見切れ防止 */
+      background-position:40% center;
+      filter:grayscale(.05) contrast(1.05) brightness(.9);
+      transform:scale(1.03);
+    }
+    .iwk-hero::after{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.45));
+    }
+    .iwk-hero__inner{position:relative; z-index:1; max-width:1100px; margin:0 auto; text-align:center;}
+    .iwk-eyebrow{letter-spacing:.12em; font-weight:800; opacity:.92; margin:0 0 10px;}
+    .iwk-title{font-size:clamp(32px,4.6vw,56px); line-height:1.15; margin:.2em 0 .35em; font-weight:900;}
+    .iwk-lead{font-size:clamp(15px,2.2vw,19px); opacity:.96; margin:0 auto 24px; max-width:780px;}
+
+    /* ===== CTAボタン ===== */
+    .iwk-cta{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:16px;}
+    .iwk-btn{
+      display:inline-block; padding:13px 22px; border-radius:999px; font-weight:800; text-decoration:none;
+      background:var(--iwk-gold); color:var(--iwk-navy);
+      box-shadow:0 8px 20px rgba(0,0,0,.18);
+      transform:translateY(0); transition:transform .12s ease, box-shadow .12s ease, filter .12s ease;
+    }
+    .iwk-btn:hover{transform:translateY(-1px); box-shadow:0 12px 26px rgba(0,0,0,.22); filter:brightness(1.02);}
+    .iwk-btn--outline{background:transparent; border:2px solid var(--iwk-gold); color:var(--iwk-gold);}
+    .iwk-btn--ghost{background:rgba(255,255,255,.12); color:#fff; border:1px solid rgba(255,255,255,.28);}
+
+    /* ===== 特徴カード ===== */
+    .container{max-width:1100px;margin:0 auto;padding:0 16px}
+    .iwk-features{max-width:1100px;margin:32px auto 0;padding:0 16px;display:grid;gap:18px;grid-template-columns:repeat(3,1fr);}
+    .iwk-feature{background:#fff;color:var(--iwk-navy);border-radius:16px;padding:20px;box-shadow:0 6px 24px rgba(0,0,0,.08);}
+    .iwk-feature h3{margin:.2em 0 .35em;font-size:19px;font-weight:800;letter-spacing:.01em;}
+    .iwk-feature p{margin:0;font-size:15px;line-height:1.7;opacity:.95;}
+
+    @media (max-width:900px){
+      .iwk-features{grid-template-columns:1fr;}
+      .iwk-hero{padding:72px 16px;}
+    }
+  </style>
+</head>
+<body>
+  <header class="iwk-hero" role="banner" aria-label="岩槻新校ヒーローセクション">
+    <div class="iwk-hero__inner">
+      <p class="iwk-eyebrow">受検生の方へ</p>
+      <h1 class="iwk-title">岩槻新校<br>はじまる。</h1>
+      <p class="iwk-lead">説明会・学校案内・メッセージなど、最新情報をまとめました。</p>
+      <nav class="iwk-cta" aria-label="主要導線">
+        <a class="iwk-btn" href="https://iwatsuki-h.spec.ed.jp/XXX/entry_info" target="_top">説明会・入試情報</a>
+        <a class="iwk-btn iwk-btn--outline" href="https://iwatsuki-h.spec.ed.jp/XXX/pamphlet" target="_top">学校案内</a>
+        <a class="iwk-btn iwk-btn--ghost" href="https://iwatsuki-h.spec.ed.jp/XXX/message" target="_top">校長メッセージ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+    <section class="iwk-features" aria-label="岩槻新校の特徴">
+      <article class="iwk-feature"><h3>探究 × 地域連携</h3><p>地域と学ぶ実践型の学び。外部連携で“使える力”を伸ばす。</p></article>
+      <article class="iwk-feature"><h3>少人数 × 手厚い支援</h3><p>面談・補講・個別サポートで、挑戦の背中を押す。</p></article>
+      <article class="iwk-feature"><h3>情報発信を強化</h3><p>写真・記事・動画で学校の“今”をタイムリーに発信。</p></article>
+    </section>
+  </main>
 </body>
 </html>
 
